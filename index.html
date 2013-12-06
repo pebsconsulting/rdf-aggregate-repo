@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Rdf-aggregate-repo : An aggregate RDF::Repository supporting a subset of named graphs and zero or more named graphs mapped to the default graph." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Rdf-aggregate-repo</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ruby-rdf/rdf-aggregate-repo">View on GitHub</a>
+
+          <h1 id="project_title">Rdf-aggregate-repo</h1>
+          <h2 id="project_tagline">An aggregate RDF::Repository supporting a subset of named graphs and zero or more named graphs mapped to the default graph.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ruby-rdf/rdf-aggregate-repo/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ruby-rdf/rdf-aggregate-repo/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="rdfaggregaterepo" class="anchor" href="#rdfaggregaterepo"><span class="octicon octicon-link"></span></a>RDF::AggregateRepo</h1>
+
+<p>An aggregate RDF::Repository supporting a subset of named graphs and zero or more named graphs mapped to the default graph.</p>
+
+<p><a href="http://badge.fury.io/rb/rdf-aggregate-repo"><img src="https://badge.fury.io/rb/rdf-aggregate-repo.png" alt="Gem Version"></a>
+<a href="http://travis-ci.org/ruby-rdf/rdf-aggregate-repo"><img src="https://travis-ci.org/ruby-rdf/rdf-aggregate-repo.png?branch=master" alt="Build Status"></a></p>
+
+<h2>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
+
+<p>Maps named graphs from one or more <code>RDF::Queryable</code> instances into a single object, allowing a specific set of <em>named graphs</em> to be seen, as well as a <em>default graph</em> made up from one or more <em>named graphs</em>. This is used to implement <a href="http://www.w3.org/TR/sparql11-query/#rdfDataset">SPARQL Datasets</a>.</p>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<pre><code>require 'rdf'
+require 'rdf/nquads'
+repo = RDF::Repository.load("http://ruby-rdf.github.com/rdf/etc/doap.nq")
+
+# Instantiate a new aggregate repo based on an existing repo
+aggregate = RDF::AggregateRepo.new(repo)
+
+# Use the default graph from the repo as the default graph of the aggregate
+aggregate.add_default(false)
+
+# Use a single named graph
+aggregate.add_named(RDF::URI("http://greggkellogg.net/foaf#me"))
+
+# Retrieve all contexts
+aggreggate.contexts.to_a #=&gt; [RDF::URI("http://greggkellogg.net/foaf#me")]
+</code></pre>
+
+<h2>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h2>
+
+<ul>
+<li>
+<a href="http://ruby-lang.org/">Ruby</a> (&gt;= 1.8.7) or (&gt;= 1.8.1 with [Backports][])</li>
+<li>
+<a href="http://ruby-rdf.github.com/">RDF.rb</a> (&gt;= 1.0)</li>
+</ul><h2>
+<a name="mailing-list" class="anchor" href="#mailing-list"><span class="octicon octicon-link"></span></a>Mailing List</h2>
+
+<ul>
+<li><a href="http://lists.w3.org/Archives/Public/public-rdf-ruby/">http://lists.w3.org/Archives/Public/public-rdf-ruby/</a></li>
+</ul><h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<ul>
+<li>
+<a href="http://github.com/gkellogg">Gregg Kellogg</a> - <a href="http://greggkellogg.net/">http://greggkellogg.net/</a>
+</li>
+</ul><h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>This repository uses <a href="https://github.com/nvie/gitflow">Git Flow</a> to mange development and release activity. All submissions <em>must</em> be on a feature branch based on the <em>develop</em> branch to ease staging and integration.</p>
+
+<ul>
+<li>Do your best to adhere to the existing coding conventions and idioms.</li>
+<li>Don't use hard tabs, and don't leave trailing whitespace on any line.
+Before committing, run <code>git diff --check</code> to make sure of this.</li>
+<li>Do document every method you add using <a href="http://yardoc.org/">YARD</a> annotations. Read the
+<a href="http://rubydoc.info/docs/yard/file/docs/GettingStarted.md">tutorial</a> or just look at the existing code for examples.</li>
+<li>Don't touch the <code>.gemspec</code> or <code>VERSION</code> files. If you need to change them,
+do so on your private branch only.</li>
+<li>Do feel free to add yourself to the <code>CREDITS</code> file and the
+corresponding list in the the <code>README</code>. Alphabetical order applies.</li>
+<li>Don't touch the <code>AUTHORS</code> file. If your contributions are significant
+enough, be assured we will eventually add you in there.</li>
+<li>Do note that in order for us to merge any non-trivial changes (as a rule
+of thumb, additions larger than about 15 lines of code), we need an
+explicit <a href="http://lists.w3.org/Archives/Public/public-rdf-ruby/2010May/0013.html">public domain dedication</a> on record from you.</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This is free and unencumbered public domain software. For more information,
+see <a href="http://unlicense.org/">http://unlicense.org/</a> or the accompanying {file:UNLICENSE} file.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rdf-aggregate-repo maintained by <a href="https://github.com/ruby-rdf">ruby-rdf</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
